@@ -24,6 +24,24 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+
+
+// Serve static frontend files from the 'frontend/dist' directory
+// This assumes your Vite build output is in 'frontend/dist'
+const frontendPath = path.join(__dirname, '..', 'frontend', 'dist');
+app.use(express.static(frontendPath));
+
+// Handle client-side routing (SPA fallback)
+// All non-API routes should serve the index.html file
+app.get('*', (req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  // Serve index.html for all other routes
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
 const connectDatabase = async () => {
   if (!process.env.MONGODB_URI) {
     console.warn('MONGODB_URI is not set. API routes can run, but scheduled persistence is disabled.');
