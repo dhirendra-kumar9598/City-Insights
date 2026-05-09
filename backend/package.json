@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "npm run build --prefix ../frontend && npm run build --prefix backend"
+    "build": "cd ../frontend && npm install && npm run build"
   },
   "author": "",
   "license": "MIT",
