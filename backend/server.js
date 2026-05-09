@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cron = require('node-cron');
+const path = require('path');
 
 const cityRouter = require('./routes/city');
 const { fetchAndStoreAll } = require('./services/fetchAndStoreAll');
